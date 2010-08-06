@@ -361,12 +361,12 @@ static void startUSB()
 	usb_install_ep_handler(1, USBIn, dataSent, 0);
 	usb_start(enumerateHandler, startHandler);
 }
-/*
+
 Event testEvent;
 
 static void test_event_handler(Event* event, void* opaque) {
 	Reboot();
-}*/
+}
 
 static int setup_devices() {
 	// Basic prerequisites for everything else
@@ -378,8 +378,6 @@ static int setup_devices() {
 	interrupt_setup();
 
 	// Clock test
-	// This seems to be mostly working... I'm getting a 17 second delay instead of 10 second though,
-	// so I probably have the wrong value for TicksPerSec
 	timer_setup();
 	udelay(10000000);
 	Reboot();	
