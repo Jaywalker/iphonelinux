@@ -66,6 +66,11 @@ void OpenIBootStart() {
 	setup_openiboot();
 	pmu_charge_settings(TRUE, FALSE, FALSE);
 
+	startUSB();
+	//pmu_set_iboot_stage(0);
+	//bufferPrintf("Hi\r\n");
+	while (1) {}
+	
 	framebuffer_setdisplaytext(TRUE);
 	framebuffer_clear();
 
@@ -379,17 +384,16 @@ static int setup_devices() {
 
 	timer_setup();
 	event_setup();
-	
+	wdt_setup();
+
+	usb_shutdown();
+	return 0; //JEOR
+
 	LeaveCriticalSection();
 	event_add(&testEvent, 10000000, test_event_handler, NULL);
 
 	// End of reversal
 	while (1) {}
-
-
-
-
-
 
 	// Need interrupts for everything afterwards
 	interrupt_setup();
@@ -420,9 +424,11 @@ static int setup_openiboot() {
 	setup_devices();
 
 	// End of reversal
-	while (1) {}
+	//while (1) {}
 
 	LeaveCriticalSection();
+
+	return 0; //JEOR
 
 	#ifndef CONFIG_IPOD2G
 	clock_set_sdiv(0);
