@@ -377,15 +377,22 @@ static int setup_devices() {
 	// Need interrupts for everything afterwards
 	interrupt_setup();
 
-	// Clock test
 	timer_setup();
-	udelay(10000000);
-	Reboot();	
-	//event_setup();
-	//event_add(&testEvent, 1000, test_event_handler, NULL);
+	event_setup();
+	
+	LeaveCriticalSection();
+	event_add(&testEvent, 10000000, test_event_handler, NULL);
 
 	// End of reversal
 	while (1) {}
+
+
+
+
+
+
+	// Need interrupts for everything afterwards
+	interrupt_setup();
 
 	gpio_setup();
 
