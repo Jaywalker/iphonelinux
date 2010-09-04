@@ -38,9 +38,19 @@
 // Values
 #define USB_INTERRUPT 0x13
 
+#ifdef CONFIG_IPOD2G
+#define USB_OTGCLOCKGATE 0x18
+#define USB_PHYCLOCKGATE 0x19
+#else
 #define USB_OTGCLOCKGATE 0x2
 #define USB_PHYCLOCKGATE 0x23
+#endif
+
+#ifdef CONFIG_IPOD2G
+#define USB_ONOFF_OFF 1
+#else
 #define USB_ONOFF_OFF 3	// bits 0, 1
+#endif
 
 #define OPHYPWR_FORCESUSPEND 0x1
 #define OPHYPWR_PLLPOWERDOWN 0x2
